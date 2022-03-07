@@ -1,0 +1,23 @@
+{
+  "name": "a03-irischien",
+  "version": "1.0.0",
+  "description": "making api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a03-irischien.git"
+  },
+  "author": "irischien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a03-irischien/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a03-irischien#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "minimist": "^1.2.5"
+  }
+}
