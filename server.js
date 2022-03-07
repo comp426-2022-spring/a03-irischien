@@ -1,6 +1,5 @@
 import { coinFlip,coinFlips,countFlips,flipACoin } from "./modules/coin.mjs";
 
-
 import minimist from 'minimist';
 import express from 'express';
 
@@ -8,7 +7,7 @@ const express = require('express')
 const app = express()
 
 var argv = minimist(process.argv.slice(2))
-var allowedName = 'port'
+var argPort = argv['port']
 const HTTP_PORT = argv[allowedName] || 5000
 
 // start an app server
@@ -29,17 +28,13 @@ app.get('/app/flip/', (req,res) => {
     res.statusCode = 200;
     let flip = coinFlip()
     res.json({flip: flip})
-    res.writeHead(res.statusCode, {'Content-Type' : 'application/json' });
 })
 
 app.get('/app/flips/:number', (req, res) => {
     res.statusCode = 200;
-    var number = req.params.number;
-    let raw = coinFlips(number)
-    let summary = countFlips(raw)
-    res.json({ raw: raw, summary: summary})
-    //res.json(summary)
-    res.writeHead(res.statusCode, {'Content-Type' : 'application/json' });
+    let result = coinFlips(req.params.number)
+    let coinflip_summary = countFlips(result)
+    res.json({ raw: result, summary: coinflip_summary})
 })
 
 app.get('/app/flip/call/heads', (req, res) => {
