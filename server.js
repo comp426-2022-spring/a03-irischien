@@ -3,8 +3,14 @@ import { coinFlip,coinFlips,countFlips,flipACoin } from "./modules/coin.mjs";
 import minimist from 'minimist';
 import express from 'express';
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url)
+
 const express = require('express')
 const app = express()
+
+const minimist = require('minimist')
+const { exit } = require('process')
 
 var argv = minimist(process.argv.slice(2))
 var argPort = argv['port']
@@ -37,19 +43,6 @@ app.get('/app/flips/:number', (req, res) => {
     res.json({ raw: result, summary: coinflip_summary})
 })
 
-app.get('/app/flip/call/heads', (req, res) => {
-    res.statusCode = 200;
-    let result = flipACoin('heads')
-    res.send(result)
-    res.writeHead(res.statusCode, {'Content-Type' : 'text/plain' });
-})
-
-app.get('/app/flip/call/tails', (req, res) => {
-    res.statusCode = 200;
-    let result = flipACoin('tails')
-    res.send(result)
-    res.writeHead(res.statusCode, {'Content-Type' : 'text/plain' });
-})
 
 // Default response for any other request
 app.use(function(req, res){
