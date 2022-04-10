@@ -21,21 +21,22 @@ const server = app.listen(HTTP_PORT, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',HTTP_PORT))
 });
 
+// checks status endpoint 
 app.get('/app/', (req, res) => {
-    // Respond with status 200
         res.statusCode = 200;
-    // Respond with status message "OK"
         res.statusMessage = 'OK';
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end(res.statusCode+ ' ' +res.statusMessage)
 });
 
+// for flip function 
 app.get('/app/flip/', (req,res) => {
     res.statusCode = 200;
     let flip = coinFlip()
     res.json({flip: flip})
 })
 
+// for count flips function
 app.get('/app/flips/:number', (req, res) => {
     res.statusCode = 200;
     let result = coinFlips(req.params.number)
@@ -43,8 +44,7 @@ app.get('/app/flips/:number', (req, res) => {
     res.json({ raw: result, summary: coinflip_summary})
 })
 
-
-// Default response for any other request
+// If not recognized, default response for any other request
 app.use(function(req, res){
     res.status(404).send('404 NOT FOUND')
 });
