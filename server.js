@@ -4,16 +4,16 @@ import minimist from 'minimist';
 import express from 'express';
 
 import { createRequire } from 'module';
-const require = createRequire(import.meta.url)
+// const require = createRequire(import.meta.url)
 
 // const express = require('express')
 const app = express()
 
-const minimist = require('minimist')
-const { exit } = require('process')
+// const minimist = require('minimist')
+// const { exit } = require('process')
 
 var argv = minimist(process.argv.slice(2))
-var argPort = argv['port']
+var allowedName = 'port'
 const HTTP_PORT = argv[allowedName] || 5000
 
 // start an app server
