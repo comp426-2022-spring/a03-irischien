@@ -34,14 +34,28 @@ app.get('/app/flip/', (req,res) => {
     res.statusCode = 200;
     let flip = coinFlip()
     res.json({flip: flip})
+    res.writeHead(res.statusCode, {'Content-Type' : 'application/json'});
 })
 
 // for count flips function
 app.get('/app/flips/:number', (req, res) => {
     res.statusCode = 200;
-    let result = coinFlips(req.params.number)
-    let coinflip_summary = countFlips(result)
-    res.json({ raw: result, summary: coinflip_summary})
+    var result = coinFlips(req.params.number)
+    res.status(200).json({"raw" : result, "summary" : countFlips(flips)})
+})
+
+app.get('/app/flip/call/heads', (req, res) => {
+    res.statusCode = 200;
+    let result = flipACoin('heads')
+    res.send(result)
+    res.writeHead(res.statusCode, {'Content-Type': 'text/plain'});
+})
+
+app.get('/app/flip/call/tails', (req, res) => {
+    res.statusCode = 200;
+    let result = flipACoin('tails')
+    res.send(result)
+    res.writeHead(res.statusCode, {'Content-Type': 'text/plain'});
 })
 
 // If not recognized, default response for any other request
