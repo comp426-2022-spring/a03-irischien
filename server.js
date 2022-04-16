@@ -32,8 +32,8 @@ app.get('/app/', (req, res) => {
 // for flip function 
 app.get('/app/flip/', (req,res) => {
     res.statusCode = 200;
-    let flip = coinFlip()
-    res.json({flip: flip})
+    let result = coinFlip()
+    res.json({flip: result})
     res.writeHead(res.statusCode, {'Content-Type' : 'application/json'});
 })
 
@@ -41,7 +41,7 @@ app.get('/app/flip/', (req,res) => {
 app.get('/app/flips/:number', (req, res) => {
     res.statusCode = 200;
     var result = coinFlips(req.params.number)
-    res.status(200).json({"raw" : result, "summary" : countFlips(flips)})
+    res.status(200).json({"raw" : result, "summary" : countFlips(result)})
 })
 
 app.get('/app/flip/call/heads', (req, res) => {
